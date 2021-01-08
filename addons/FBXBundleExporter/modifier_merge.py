@@ -69,7 +69,14 @@ class Modifier(modifier.Modifier):
 
 
 			
-			
+	def join_selected_objects(self):
+		# Make the root of the group active to apply it's scale to the result object
+		prev_active_obj = bpy.context.view_layer.objects.active
+		for obj in bpy.context.view_layer.objects.selected:
+			if not obj.parent:
+				bpy.context.view_layer.objects.active = obj
+
+		bpy.ops.object.join()
 
 
 	def process_objects(self, name, objects):
@@ -77,8 +84,8 @@ class Modifier(modifier.Modifier):
 		# Merge objects into single item
 		if not objects_organise.get_objects_animation(objects):
 
-
-			bpy.ops.object.join()
+			self.join_selected_objects()
+			
 			bpy.context.object.name = name #assign bundle name
 			bpy.context.scene.cursor.location = Vector((0,0,0)) 
 			bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
