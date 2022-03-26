@@ -1,3 +1,15 @@
+# Fork of FBX Bundle Addon tweaked for SiegeUp 3d Workflow
+
+In order to export building or decoration:
+1. Install addon in Edit -> Preferences -> Add-ons -> Install
+2. In Add-on settings check only modifier "Merge" in modifiers sections
+3. Setup output directory for the files (it should be located somewhere inside Unity/Assets for quick import)
+4. Create empty object with scale = 1 and set a name for it
+5. Select all objects, related to a building or decoration and make child of an empty object using Ctrl+P
+6. Select any child object and click Export 
+7. You will see your new object in Unity, now you can setup material and use in your mods
+
+![](https://github.com/SiegeUp/Blender-FbxBundle/raw/master/SiegeUpDocs/HowToExport.png)
 
 
 ![](https://farm2.staticflickr.com/1775/43061827304_ef4d3f99be_o.png)
