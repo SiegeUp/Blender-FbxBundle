@@ -72,6 +72,18 @@ class Modifier(modifier.Modifier):
 	def join_selected_objects(self):
 		# Make the root of the group active to apply it's scale to the result object
 		prev_active_obj = bpy.context.view_layer.objects.active
+		
+		for obj in bpy.context.view_layer.objects.selected:
+			bpy.context.view_layer.objects.active = obj
+			bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+			bpy.ops.object.mode_set(mode='EDIT')
+			# select al faces
+			bpy.ops.mesh.select_all(action='SELECT')
+			# recalculate outside normals 
+			bpy.ops.mesh.normals_make_consistent(inside=False)
+			# go object mode again
+			bpy.ops.object.editmode_toggle()
+		
 		for obj in bpy.context.view_layer.objects.selected:
 			if not obj.parent:
 				bpy.context.view_layer.objects.active = obj
