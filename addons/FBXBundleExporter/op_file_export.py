@@ -164,7 +164,13 @@ def export(self, target_platform):
 		for obj in objects:
 			obj.name = obj.name.replace(prefix_copy,"")
 
-		
+		def rename_root(obj):
+			if not obj.parent:
+				obj.name = name
+			else:
+				rename_root(obj.parent)
+
+		rename_root(objects[0])
 
 
 	# Restore previous settings
